@@ -1,6 +1,9 @@
 package com.paulomarchon.testepratico.cidade;
 
+import com.paulomarchon.testepratico.endereco.Endereco;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "cidade", schema = "cidades")
@@ -22,6 +25,9 @@ public class Cidade {
     @Column(name = "cid_uf")
     private String uf;
 
+    @OneToMany(mappedBy = "cidade")
+    private List<Endereco> enderecos;
+
     public Cidade(String nome, String uf) {
         this.nome = nome.toUpperCase();
         this.uf = uf.toUpperCase();
@@ -41,6 +47,10 @@ public class Cidade {
 
     public String getUf() {
         return uf;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
     @Override

@@ -31,4 +31,9 @@ public class CidadeController {
     public List<CidadeDto> buscarCidadePorUf(@PathVariable("siglaUf") String siglaUf) {
         return cidadeService.buscarCidadePorUf(siglaUf);
     }
+
+    @GetMapping("enderecos={nomeCidade}")
+    public List<String> buscarEnderecosDaCidade(@PathVariable("nomeCidade")String nomeCidade) {
+        return cidadeService.buscarEnderecosDeCidade(nomeCidade);
+    }
 }
