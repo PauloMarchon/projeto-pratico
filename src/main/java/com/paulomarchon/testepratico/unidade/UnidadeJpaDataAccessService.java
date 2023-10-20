@@ -23,7 +23,7 @@ public class UnidadeJpaDataAccessService implements UnidadeDao {
 
     @Override
     public Optional<Unidade> selecionarUnidadePorId(Integer unidadeId) {
-        return Optional.of(unidadeRepository.getReferenceById(unidadeId));
+        return unidadeRepository.findById(unidadeId);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UnidadeJpaDataAccessService implements UnidadeDao {
 
     @Override
     public Page<Unidade> selecionarUnidadePorSigla(String sigla) {
-        return unidadeRepository.findBySigla(sigla, Pageable.ofSize(20));
+        return unidadeRepository.findBySigla(sigla, Pageable.ofSize(10));
     }
 
     @Override
