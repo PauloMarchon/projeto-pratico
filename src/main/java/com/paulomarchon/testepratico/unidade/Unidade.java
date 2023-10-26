@@ -1,5 +1,6 @@
 package com.paulomarchon.testepratico.unidade;
 
+import com.paulomarchon.testepratico.endereco.Endereco;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,6 +23,21 @@ public class Unidade {
     private String nome;
     @Column(name = "unid_sigla")
     private String sigla;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "unidade_endereco",
+        joinColumns =
+                { @JoinColumn(name = "unid_id", referencedColumnName = "unid_id")},
+            inverseJoinColumns =
+                { @JoinColumn(name = "end_id", referencedColumnName = "end_id")}
+    )
+    private Endereco endereco;
+
+    public Unidade(String nome, String sigla, Endereco endereco) {
+        this.nome = nome;
+        this.sigla = sigla;
+        this.endereco = endereco;
+    }
 
     public Unidade(String nome, String sigla) {
         this.nome = nome;
@@ -49,6 +65,14 @@ public class Unidade {
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     @Override

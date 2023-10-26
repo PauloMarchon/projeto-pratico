@@ -1,6 +1,7 @@
 package com.paulomarchon.testepratico.endereco;
 
 import com.paulomarchon.testepratico.cidade.Cidade;
+import com.paulomarchon.testepratico.unidade.Unidade;
 import jakarta.persistence.*;
 
 @Entity
@@ -26,10 +27,11 @@ public class Endereco {
     private int numero;
     @Column(name = "end_bairro")
     private String bairro;
-
     @ManyToOne
     @JoinColumn(name = "cid_id", referencedColumnName = "cid_id")
     private Cidade cidade;
+    @OneToOne(mappedBy = "endereco")
+    private Unidade unidade;
 
     public Endereco(String tipoLogradouro, String logradouro, int numero, String bairro, Cidade cidade) {
         this.tipoLogradouro = tipoLogradouro.toUpperCase();
