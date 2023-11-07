@@ -1,7 +1,10 @@
 package com.paulomarchon.testepratico.unidade;
 
 import com.paulomarchon.testepratico.endereco.Endereco;
+import com.paulomarchon.testepratico.lotacao.Lotacao;
 import jakarta.persistence.*;
+
+import java.util.Collection;
 
 @Entity
 @Table(name = "unidade", schema = "unidades")
@@ -32,6 +35,9 @@ public class Unidade {
                 { @JoinColumn(name = "end_id", referencedColumnName = "end_id")}
     )
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "unidade")
+    private Collection<Lotacao> lotacoes;
 
     public Unidade(String nome, String sigla, Endereco endereco) {
         this.nome = nome;
@@ -73,6 +79,14 @@ public class Unidade {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Collection<Lotacao> getLotacoes() {
+        return lotacoes;
+    }
+
+    public void setLotacoes(Collection<Lotacao> lotacoes) {
+        this.lotacoes = lotacoes;
     }
 
     @Override
