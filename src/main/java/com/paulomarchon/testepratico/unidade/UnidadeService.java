@@ -27,6 +27,12 @@ public class UnidadeService {
                 .collect(Collectors.toList());
     }
 
+    public UnidadeDto buscarUnidadePorId(Integer unidadeId) {
+        return unidadeDao.selecionarUnidadePorId(unidadeId)
+                .map(unidadeDtoMapper)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Unidade com ID informado nao encontrada"));
+    }
+
     public List<UnidadeDto> buscarUnidadePorSigla(String sigla) {
         return unidadeDao.selecionarUnidadePorSigla(sigla)
                 .stream()
@@ -37,7 +43,7 @@ public class UnidadeService {
     public UnidadeDto buscarUnidadePorNome(String nome) {
         return unidadeDao.selecionarUnidadePorNome(nome)
                 .map(unidadeDtoMapper)
-                .orElseThrow(() -> new RuntimeException(""));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Unidade com nome informado nao encontrada"));
     }
 
     public void cadastrarUnidade(UnidadeDto unidadeCadastro) {

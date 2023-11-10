@@ -21,7 +21,7 @@ public class UnidadeController {
         return unidadeService.buscarTodasUnidades();
     }
 
-    @GetMapping("/busca={nomeUnidade}")
+    @GetMapping("/{nomeUnidade}")
     public UnidadeDto buscarUnidadePorNome(@PathVariable("nomeUnidade") String nomeUnidade) {
         return unidadeService.buscarUnidadePorNome(nomeUnidade);
     }
@@ -29,8 +29,8 @@ public class UnidadeController {
     @PostMapping
     public ResponseEntity<?> cadastrarUnidade(@RequestBody UnidadeDto unidadeCadastro) {
         unidadeService.cadastrarUnidade(unidadeCadastro);
-        return ResponseEntity.ok()
-                .body(HttpStatus.CREATED);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("{unidadeId}")

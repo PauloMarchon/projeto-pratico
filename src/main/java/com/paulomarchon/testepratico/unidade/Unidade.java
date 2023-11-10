@@ -28,7 +28,7 @@ public class Unidade {
     private String sigla;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "unidade_endereco",
+    @JoinTable(name = "unidade_endereco", schema = "unidades",
         joinColumns =
                 { @JoinColumn(name = "unid_id", referencedColumnName = "unid_id")},
             inverseJoinColumns =
@@ -38,6 +38,13 @@ public class Unidade {
 
     @OneToMany(mappedBy = "unidade")
     private Collection<Lotacao> lotacoes;
+
+    public Unidade(Integer id, String nome, String sigla) {
+        this.id = id;
+        this.nome = nome;
+        this.sigla = sigla;
+
+    }
 
     public Unidade(String nome, String sigla, Endereco endereco) {
         this.nome = nome;
